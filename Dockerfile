@@ -5,6 +5,7 @@ RUN apt-get update && apt-get -y install libleveldb-dev
 COPY . /source
 RUN /source/scripts/install_cmake.sh
 
+RUN cd /source && git submodule update --init # Usually you do not clone repo with "--recursive"
 RUN mkdir /build            # Create a build directory.
 RUN cd /build && /root/.local/bin/cmake /source && \
     cd fuzzer && make        # Build fuzzer targets.
